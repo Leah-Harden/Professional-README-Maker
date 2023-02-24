@@ -34,11 +34,7 @@ function writeToFile(fileName, data) {}
 function init() {
 
     inquirer
-    .prompt([
-        questions
-    ]
-
-    )
+    .prompt(questions)
  //   .then((data) => {
    //     const Code = `  `
 }
