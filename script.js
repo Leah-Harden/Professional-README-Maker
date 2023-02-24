@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-
 const fs = require('fs');
 
 
@@ -10,7 +9,7 @@ const questions = [
         type: 'input',
         name: 'name',
         message: 'What is your name?',
-        validate()
+      //  validate()n
         },
         {
         type: 'checkbox',
@@ -34,16 +33,22 @@ function writeToFile(fileName, data) {}
 // TODO: Create a function to initialize app
 function init() {
 
-    .then((data) => {
-        const Code = `  `
+    inquirer
+    .prompt([
+        questions
+    ]
+
+    )
+ //   .then((data) => {
+   //     const Code = `  `
 }
-}
+//}
 // Function call to initialize app
 init();
 
-.then((data) => {
+//.then((data) => {
 
-    fs.writeFile(README.md, JSON.stringify(data, null, '\t'), (err) =>
-    err ? console.log(err) : console.log('Success!')
-    );
-});
+//     fs.writeFile(README.md, JSON.stringify(data, null, '\t'), (err) =>
+//     err ? console.log(err) : console.log('Success!')
+//     );
+// });
