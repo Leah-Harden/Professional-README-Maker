@@ -138,11 +138,12 @@ function init() {
     
     // TODO: Create a function to write README file
     
-    function writeToFile(fileName, data) {
+    
         fs.writeFile(README.md, generateReadMe(questions), (err) =>
         err ? console.log(err) : console.log('Success!')
         );
-    }
+
+    
 }
     // Function call to initialize app
 init();
