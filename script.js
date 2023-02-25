@@ -67,15 +67,19 @@ const questions = [
         validate: (value)=>{ if(value){return true} else {return `Please give example of tests that you did for this project.`}},
     },
 ]
+
+
+
+function generateReadMe(questions) {
+
     
-    
-        const template = `
+    const template = `
         
-# ${title}
+# ${questions.title}
 
 ---
 ## Description
-${description}
+${questions.description}
 
 ---
 
@@ -92,10 +96,10 @@ ${description}
 
 ---
 ## Installation
-${installation}
+${questions.installation}
 
 ## Usage
-${usage}
+${questionsusage}
 
 
 ## Credits
@@ -122,6 +126,7 @@ ${tests}
 
 
 `
+}
 
 
 
@@ -130,24 +135,16 @@ function init() {
     
     inquirer
     .prompt(questions)
-    .then(({
-        title,
-        description,
-    })=>{ tem
-        
+    
+    // TODO: Create a function to write README file
+    
+    function writeToFile(fileName, data) {
+        fs.writeFile(README.md, generateReadMe(questions), (err) =>
+        err ? console.log(err) : console.log('Success!')
+        );
     }
-    )
 }
-// Function call to initialize app
+    // Function call to initialize app
 init();
 
-
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(README.md, JSON.stringify(data, null, '\t'), (err) =>
-    err ? console.log(err) : console.log('Success!')
-    );
-
-}
 
