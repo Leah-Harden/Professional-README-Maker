@@ -124,34 +124,30 @@ ${tests}
 `
 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
 function init() {
     
-    //     inquirer
-    //     .prompt(questions)
-.then((){
-title,
-description,
-}
-)
-    
-    fs.writeFile(README.md, JSON.stringify(data, null, '\t'), (err) =>
-    err ? console.log(err) : console.log('Success!')
-    );
-
-//     .then(( => {
-//     const Code = `  `
-// })=> {
-
-// }
-//     )
+    inquirer
+    .prompt(questions)
+    .then(({
+        title,
+        description,
+    })=>{ tem
+        
+    }
+    )
 }
 // Function call to initialize app
 init();
 
-//.then((data) => {
 
+
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(README.md, JSON.stringify(data, null, '\t'), (err) =>
+    err ? console.log(err) : console.log('Success!')
+    );
+
+}
 
