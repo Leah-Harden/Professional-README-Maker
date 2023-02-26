@@ -134,16 +134,17 @@ ${tests}
 function init() {
     
     inquirer
-    .prompt(questions)
+    .prompt(questions);
     
     // TODO: Create a function to write README file
     
-    
-        fs.writeFile(README.md, generateReadMe(questions), (err) =>
+    function write(fileName, data) {
+        //fs.writeFile(README.md, generateReadMe(questions), (err) =>
+        fs.writeFile(fileName, data, (err) =>
         err ? console.log(err) : console.log('Success!')
         );
-
-    
+    }
+    write()
 }
     // Function call to initialize app
 init();
