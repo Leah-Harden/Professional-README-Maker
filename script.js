@@ -133,20 +133,21 @@ ${tests}
 // TODO: Create a function to initialize app
 function init() {
     
-    inquirer
-    .prompt(questions);
-    
-    // TODO: Create a function to write README file
-    
-    function write(fileName, data) {
-        //fs.writeFile(README.md, generateReadMe(questions), (err) =>
-        fs.writeFile(fileName, data, (err) =>
-        err ? console.log(err) : console.log('Success!')
-        );
+    return inquirer
+    .prompt(questions)
+    .then((answers) => {
+        console.log(answers, "answers")
+    })
+        // TODO: Create a function to write README file
+        function write(fileName, data) {
+            //fs.writeFile(README.md, generateReadMe(questions), (err) =>
+            fs.writeFile(fileName, data, (err) =>
+            err ? console.log(err) : console.log('Success!')
+            );
+        }
     }
     write()
-}
     // Function call to initialize app
-init();
+    init();
 
 
