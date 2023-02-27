@@ -99,55 +99,57 @@ ${questions.description}
 ${questions.installation}
 
 ## Usage
-${questionsusage}
+${questions.usage}
 
 
 ## Credits
-${credits}
+${questions.credits}
 
 
 ## License
-${license}
+${questions.license}
 
 
 
 ## Badges
-${badges}
+${questions.badges}
 
 ## Features
-${features}
+${questions.features}
 
 ## How to Contribute
-${how_to_contribute}
+${questions.how_to_contribute}
 
 
 ## Tests
-${tests}
+${questions.tests}
 
 
 `
 }
 
 
+function writefile(fileName, data) {
+    //fs.writeFile(README.md, generateReadMe(questions), (err) =>
+    fileName = "README.md"
+    data = generateReadMe(questions)
+    fs.writeFile(fileName, data, (err) =>
+    err ? console.log(err) : console.log('Success!')
+    );
+}
 
 // TODO: Create a function to initialize app
 function init() {
     
-    return inquirer
+    inquirer
     .prompt(questions)
     .then((answers) => {
         console.log(answers, "answers")
+        writefile()
     })
-        // TODO: Create a function to write README file
-        function write(fileName, data) {
-            //fs.writeFile(README.md, generateReadMe(questions), (err) =>
-            fs.writeFile(fileName, data, (err) =>
-            err ? console.log(err) : console.log('Success!')
-            );
-        }
-    }
-    write()
-    // Function call to initialize app
+    // TODO: Create a function to write README file
+}
+// Function call to initialize app
     init();
 
 
