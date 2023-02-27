@@ -126,30 +126,31 @@ ${questions.tests}
 
 
 `
+return template
 }
 
 
-function writefile(fileName, data) {
+
+function writefile(fileName, answers) {
     //fs.writeFile(README.md, generateReadMe(questions), (err) =>
-    fileName = "README.md"
-    data = generateReadMe(questions)
+    data = generateReadMe(answers)
     fs.writeFile(fileName, data, (err) =>
-    err ? console.log(err) : console.log('Success!')
+    err ? console.log(err) : console.log('Success!'),
     );
 }
-
 // TODO: Create a function to initialize app
 function init() {
     
+    fileName = "README.md",
     inquirer
     .prompt(questions)
     .then((answers) => {
-        console.log(answers, "answers")
-        writefile()
+        console.log(answers, "answers"),
+        writefile(fileName, answers)
     })
     // TODO: Create a function to write README file
 }
 // Function call to initialize app
-    init();
+init();
 
 
