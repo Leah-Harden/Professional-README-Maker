@@ -97,6 +97,7 @@ function generateReadMe(questions) {
 
 ${questions.license_badge}
 [![License](https://img.shields.io/badge/License-${questions.license_badge}-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
+${questions.license}
 ---
 ## Description
 ${questions.description}
