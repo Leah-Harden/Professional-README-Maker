@@ -97,8 +97,8 @@ function generateReadMe(questions) {
 # ${questions.title}
 
 ## License ${questions.license_badge}
-${licenseBadge}
-${questions.licenseDescription}
+${licenseBadgevar}
+${licenseDescription}
 ---
 ## Description
 ${questions.description}
@@ -151,6 +151,40 @@ ${questions.questions_email}
 
 
 
+
+function licenseBadge(answers) {
+    let licenseBadgevar;
+    let licenseDescription;
+    
+    if (answers.license_badge === 'MIT') {
+        licenseBadgevar = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+        licenseDescription = `Permission is hereby granted, free of charge,
+        to any person obtaining a copy of this software and associated documentation 
+        files (the “Software”), to deal in the Software without restriction, including
+        without limitation the rights to use, copy, modify, merge, publish, distribute,
+        sublicense, and/or sell copies of the Software, and to permit persons to whom the 
+        Software is furnished to do so, subject to the following conditions:.`
+    } else if (answers.license_badge === 'Boost') {
+        licenseBadgevar = `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`
+        licenseDescription = `Permission is hereby granted, free of charge, to any person or organization
+        obtaining a copy of the software and accompanying documentation covered by
+        this license (the "Software") to use, reproduce, display, distribute,
+        execute, and transmit the Software, and to prepare derivative works of the
+        Software, and to permit third-parties to whom the Software is furnished to
+        do so, all subject to the following:`;
+    } else if (answers.license_badge === 'Mozilla Public License 2.0') {
+        licenseBadgevar = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
+        licenseDescription = `Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
+        under intellectual property rights (other than patent or trademark) Licensable
+        by such Contributor to use, reproduce, make available, modify, display, perform, distribute, 
+        and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
+        under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, 
+        and otherwise transfer either its Contributions or its Contributor Version.`;
+    } else {
+        licenseBadgevar = ''; // no license badge
+        licenseDescription = 'Default copyright laws apply.';
+    }
+}
 function writefile(fileName, answers) {
     //fs.writeFile(README.md, generateReadMe(questions), (err) =>
     data = generateReadMe(answers)
@@ -158,43 +192,9 @@ function writefile(fileName, answers) {
         err ? console.log(err) : console.log('Success!'),
     );
 }
-
-function licenseBadge(answers) {
-    let licenseBadge
-    let licenseDescription
-
-    if (answers.license_badge === 'MIT') {
-        licenseBadge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
-        return licenseDescription = `Permission is hereby granted, free of charge,
-        to any person obtaining a copy of this software and associated documentation 
-        files (the “Software”), to deal in the Software without restriction, including
-        without limitation the rights to use, copy, modify, merge, publish, distribute,
-        sublicense, and/or sell copies of the Software, and to permit persons to whom the 
-        Software is furnished to do so, subject to the following conditions:.`
-    } else if (answers.license_badge === 'Boost') {
-        licenseBadge = `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`
-        return licenseDescription = `Permission is hereby granted, free of charge, to any person or organization
-        obtaining a copy of the software and accompanying documentation covered by
-        this license (the "Software") to use, reproduce, display, distribute,
-        execute, and transmit the Software, and to prepare derivative works of the
-        Software, and to permit third-parties to whom the Software is furnished to
-        do so, all subject to the following:`;
-    } else if (answers.license_badge === 'Mozilla Public License 2.0') {
-        licenseBadge = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
-        return licenseDescription = `Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
-        under intellectual property rights (other than patent or trademark) Licensable
-        by such Contributor to use, reproduce, make available, modify, display, perform, distribute, 
-        and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
-        under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, 
-        and otherwise transfer either its Contributions or its Contributor Version.`;
-    } else {
-        licenseBadge = ''; // no license badge
-        licenseDescription = 'Default copyright laws apply.';
-    }
-}
 // TODO: Create a function to initialize app
 function init() {
-
+    
     fileName = "README.md",
         inquirer
             .prompt(questions)
