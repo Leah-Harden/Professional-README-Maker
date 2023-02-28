@@ -44,9 +44,12 @@ const questions = [
         },
         {
         type: 'checkbox',
-        name: 'badges',
-        message: 'What badges would you like to add? ',
-        choices: ['Size', 'Your Twitter', 'Window OS', 'Mac OS'],
+        name: 'license_badge',
+        message: 'What license badge would you like to add? ',
+        choices: ['MIT', 'Academic Free License v3.0', 'Mozilla Public License 2.0', 'None/Default'],
+        validate: (value)=>{ if(value){ 
+
+        }},
         },
         {
         type: 'input',
@@ -66,6 +69,18 @@ const questions = [
         message: 'What are the test that you have done on this project? How did those test go?',
         validate: (value)=>{ if(value){return true} else {return `Please give example of tests that you did for this project.`}},
     },
+    {
+        type: 'input',
+        name: 'questions_GitHub',
+        message: 'What is your GitHub username?',
+        validate: (value)=>{ if(value){return true} else {return `Please give example of tests that you did for this project.`}},
+    },
+    {
+        type: 'input',
+        name: 'questions_email',
+        message: 'What is your email?',
+        validate: (value)=>{ if(value){return true} else {return `Please give example of tests that you did for this project.`}},
+    },
 ]
 
 
@@ -77,6 +92,7 @@ function generateReadMe(questions) {
         
 # ${questions.title}
 
+${questions.license_badge}
 ---
 ## Description
 ${questions.description}
@@ -124,7 +140,14 @@ ${questions.how_to_contribute}
 ## Tests
 ${questions.tests}
 
+---
+## Questions thought GitHub
+If you have any question of suggestion here is my get Github to contact me.
+${questions.questions_GitHub}
 
+## Questions thought Email
+If you have any futher questions here is my email.
+${questions.questions_email}
 `
 return template
 }
