@@ -89,8 +89,8 @@ const questions = [
 
 
 function generateReadMe(questions) {
-
-
+let licenseBadgevar = "";
+let licenseDescription = "";
     //[![License](https://img.shields.io/badge/License-${questions.license_badge}-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
     const template = `
         
