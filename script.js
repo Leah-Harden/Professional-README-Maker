@@ -48,12 +48,12 @@ const questions = [
         message: 'What license badge would you like to add? ',
         choices: ['MIT', 'Boost', 'Mozilla Public License 2.0', 'None/Default'],
         validate: (value) => { if (value) { return true } else { return `Please pick a license for this project.` } },
-            //if(value){console.log(value)} {return true};`
-            // if (value = 'Boost') value = `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)` +
-            //     `The Boost License means: `
-            //TypeError: "[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)" is not a function
+        //if(value){console.log(value)} {return true};`
+        // if (value = 'Boost') value = `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)` +
+        //     `The Boost License means: `
+        //TypeError: "[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)" is not a function
 
-        },
+    },
     {
         type: 'input',
         name: 'features',
@@ -95,9 +95,9 @@ function generateReadMe(questions) {
         
 # ${questions.title}
 
-${questions.license_badge}
+## License ${questions.license_badge}
 [![License](https://img.shields.io/badge/License-${questions.license_badge}-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
-${questions.license}
+${questions.licenseDescription}
 ---
 ## Description
 ${questions.description}
@@ -137,11 +137,11 @@ ${questions.how_to_contribute}
 ${questions.tests}
 
 ---
-## Questions thought GitHub
+## Questions through GitHub
 If you have any question of suggestion here is my get Github to contact me.
 ${questions.questions_GitHub}
 
-## Questions thought Email
+## Questions through Email
 If you have any futher questions here is my email.
 ${questions.questions_email}
 `
@@ -157,6 +157,36 @@ function writefile(fileName, answers) {
         err ? console.log(err) : console.log('Success!'),
     );
 }
+
+function licenseBadge(answers) {
+    let licenseBadge, licenseDescription;
+
+    if (answers.license_badge === 'MIT') {
+        return licenseDescription = `Permission is hereby granted, free of charge,
+        to any person obtaining a copy of this software and associated documentation 
+        files (the “Software”), to deal in the Software without restriction, including
+        without limitation the rights to use, copy, modify, merge, publish, distribute,
+        sublicense, and/or sell copies of the Software, and to permit persons to whom the 
+        Software is furnished to do so, subject to the following conditions:.`
+    } else if (answers.license_badge === 'Boost') {
+        return licenseDescription = `Permission is hereby granted, free of charge, to any person or organization
+        obtaining a copy of the software and accompanying documentation covered by
+        this license (the "Software") to use, reproduce, display, distribute,
+        execute, and transmit the Software, and to prepare derivative works of the
+        Software, and to permit third-parties to whom the Software is furnished to
+        do so, all subject to the following:`;
+    } else if (answers.license_badge === 'Mozilla Public License 2.0') {
+        return licenseDescription = `Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
+        under intellectual property rights (other than patent or trademark) Licensable
+        by such Contributor to use, reproduce, make available, modify, display, perform, distribute, 
+        and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
+        under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, 
+        and otherwise transfer either its Contributions or its Contributor Version.`;
+    } else {
+        licenseBadge = ''; // no license badge
+        licenseDescription = 'Default copyright laws apply.';
+    }
+}
 // TODO: Create a function to initialize app
 function init() {
 
@@ -165,6 +195,7 @@ function init() {
             .prompt(questions)
             .then((answers) => {
                 console.log(answers, "answers"),
+                    licenseBadge(answers),
                     writefile(fileName, answers)
             })
     // TODO: Create a function to write README file
