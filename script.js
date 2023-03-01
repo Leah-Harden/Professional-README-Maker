@@ -43,7 +43,7 @@ const questions = [
     //     validate: (value) => { if (value) { return true } else { return `Please pick a license for this project.` } },
     // },
     {
-        type: 'checkbox',
+        type: 'list',
         name: 'license_badge',
         message: 'What license badge would you like to add? ',
         choices: ['MIT', 'Boost', 'Mozilla Public License 2.0', 'None/Default'],
@@ -97,7 +97,7 @@ let licenseDescription = "";
 # ${questions.title}
 
 ## License ${questions.license_badge}
-${licenseBadgevar}
+${licenseBadgeVar}
 ${licenseDescription}
 ---
 ## Description
@@ -205,10 +205,10 @@ function init() {
                 const badgesData = licenseBadge(answers);
                 // Answers = { item: answers }
                 // Answers.newItem = "value"; 
-                
+
                 //    .then((response) => {
-                    //        concat(answers,response)
-                    writefile(fileName, answers)
+                    const finalData = Array.from(answers).concat(badgesData)
+                    writefile(fileName, finalData)
                     //    })
                 })
     // TODO: Create a function to write README file
