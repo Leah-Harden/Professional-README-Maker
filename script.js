@@ -92,13 +92,13 @@ function generateReadMe(questions) {
 let licenseBadgevar = "";
 let licenseDescription = "";
     //[![License](https://img.shields.io/badge/License-${questions.license_badge}-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
+    //${licenseDescription}
     const template = `
         
 # ${questions.title}
 
 ## License ${questions.license_badge}
-${licenseBadgeVar}
-${licenseDescription}
+${licenseBadge(questions)}
 ---
 ## Description
 ${questions.description}
@@ -157,7 +157,8 @@ function licenseBadge(answers) {
     
     if (answers.license_badge === 'MIT') {
         licenseBadgeVar = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
-        licenseDescription = `Permission is hereby granted, free of charge,
+        licenseDescription = `
+        Permission is hereby granted, free of charge,
         to any person obtaining a copy of this software and associated documentation 
         files (the “Software”), to deal in the Software without restriction, including
         without limitation the rights to use, copy, modify, merge, publish, distribute,
@@ -165,7 +166,8 @@ function licenseBadge(answers) {
         Software is furnished to do so, subject to the following conditions:.`
     } else if (answers.license_badge === 'Boost') {
         licenseBadgeVar = `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`
-        licenseDescription = `Permission is hereby granted, free of charge, to any person or organization
+        licenseDescription = `
+        Permission is hereby granted, free of charge, to any person or organization
         obtaining a copy of the software and accompanying documentation covered by
         this license (the "Software") to use, reproduce, display, distribute,
         execute, and transmit the Software, and to prepare derivative works of the
@@ -173,7 +175,8 @@ function licenseBadge(answers) {
         do so, all subject to the following:`;
     } else if (answers.license_badge === 'Mozilla Public License 2.0') {
         licenseBadgeVar = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
-        licenseDescription = `Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
+        licenseDescription = `
+        Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
         under intellectual property rights (other than patent or trademark) Licensable
         by such Contributor to use, reproduce, make available, modify, display, perform, distribute, 
         and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
@@ -181,7 +184,8 @@ function licenseBadge(answers) {
         and otherwise transfer either its Contributions or its Contributor Version.`;
     } else {
         licenseBadgeVar = ''; // no license badge
-        licenseDescription = 'Default copyright laws apply.';
+        licenseDescription = `
+        Default copyright laws apply.`;
     }
     return [ licenseBadgeVar, licenseDescription ]
     
@@ -200,18 +204,17 @@ function init() {
         inquirer
             .prompt(questions)
             .then((answers) => {
-                //console.log(answers, "answers"),
-                licenseBadge(answers)
-                const badgesData = licenseBadge(answers);
+                const [ licenseBadgeVar, licenseDescription ] = licenseBadge(answers);
                 // Answers = { item: answers }
                 // Answers.newItem = "value"; 
+                answers.licenseBadgeVar = licenseBadgeVar
+                answers.licenseDescription = licenseDescription
+                    writefile(fileName, answers)
 
-                //    .then((response) => {
-                    const finalData = Array.from(answers).concat(badgesData)
-                    writefile(fileName, finalData)
-                    //    })
                 })
-    // TODO: Create a function to write README file
+                //    const finalData = Array.from(answers).concat(badgesData)
+                //    JSON.stringify(finalData)
+                // TODO: Create a function to write README file
 }
 // Function call to initialize app
 init();
