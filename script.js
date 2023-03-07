@@ -140,7 +140,7 @@ ${questions.tests}
 ---
 ## Questions through GitHub
 If you have any question of suggestion here is my get Github to contact me.
-${questions.questions_GitHub}
+https://github.com/${questions.questions_GitHub}
 
 ## Questions through Email
 If you have any futher questions here is my email.
